@@ -1,0 +1,83 @@
+﻿@model OktaGatewatTesting.Models.UserAuthTokenModel
+
+@{
+    ViewData["Title"] = "OKTA-Gateway [Test]";
+}
+
+<h1>Okta-Gateway [Test]</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <form asp-action="RedirectToOkta">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                @if (Model.IsAuthenticated == false)
+                {
+                    <div class="form-group">
+                        <label><b>Email</b></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" value="LogIn (Okta)" class="btn btn-primary" />
+                    </div>
+                }
+                else
+                {
+                    <div style="padding:20px; background-color: #F0F0F0; border-radius: 10px;">
+                        <h3>Authenticated from OKTA</h3>
+                        <hr />
+                        <div class="row">
+                            <div>
+                                <tr>
+                                    <td><b style="color: purple">@Html.DisplayNameFor(model => model.UserName):</b></td>
+                                    <td>@Html.DisplayFor(model => model.UserName)</td>
+                                </tr>
+                            </div>
+                            <div>
+                                <tr>
+                                    <td><b style="color: purple">@Html.DisplayNameFor(model => model.Email):</b></td>
+                                    <td>@Html.DisplayFor(model => model.Email)</td>
+                                </tr>
+                            </div>
+                            <div>
+                                <tr>
+                                    <td><b style="color: purple">@Html.DisplayNameFor(model => model.SiteName):</b></td>
+                                    <td>@Html.DisplayFor(model => model.SiteName)</td>
+                                </tr>
+                            </div>
+                            <div>
+                                <tr>
+                                    <td><b style="color: purple">@Html.DisplayNameFor(model => model.IsAuthenticated):</b></td>
+                                    <td>@Html.DisplayFor(model => model.IsAuthenticated)</td>
+                                </tr>
+                            </div>
+                            <div>
+                                <tr>
+                                    <td><b style="color: purple">@Html.DisplayNameFor(model => model.LogingTime ):</b></td>
+                                    <td>@Html.DisplayFor(model => model.LogingTime )</td>
+                                </tr>
+                            </div>
+                            <div>
+                                <tr>
+                                    <td><b style="color: purple">@Html.DisplayNameFor(model => model.IsValidated):</b></td>
+                                    <td>@Html.DisplayFor(model => model.IsValidated)</td>
+                                </tr>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8"></div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
